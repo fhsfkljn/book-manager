@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>bookmanager</display-name>
+  
+  <servlet>
+    <servlet-name>bookList</servlet-name>
+    <servlet-class>com.chao.web.servlet.BookListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bookList</servlet-name>
+    <url-pattern>/servlet/bookListServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>bookAdd</servlet-name>
+    <servlet-class>com.chao.web.servlet.BookAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bookAdd</servlet-name>
+    <url-pattern>/servlet/bookAddServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>bookId</servlet-name>
+    <servlet-class>com.chao.web.servlet.FindBookByIdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bookId</servlet-name>
+    <url-pattern>/servlet/findBookByIdServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>bookUpdate</servlet-name>
+    <servlet-class>com.chao.web.servlet.BookUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bookUpdate</servlet-name>
+    <url-pattern>/servlet/bookUpdateServlet</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
