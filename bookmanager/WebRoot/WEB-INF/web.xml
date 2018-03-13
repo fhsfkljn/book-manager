@@ -38,6 +38,33 @@
     <url-pattern>/servlet/bookUpdateServlet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>bookDel</servlet-name>
+    <servlet-class>com.chao.web.servlet.DelBookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bookDel</servlet-name>
+    <url-pattern>/servlet/delBookServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>booksDel</servlet-name>
+    <servlet-class>com.chao.web.servlet.DelAllBooksServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>booksDel</servlet-name>
+    <url-pattern>/servlet/delAllBooksServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>searchBooks</servlet-name>
+  	<servlet-class>com.chao.web.servlet.SearchBooksServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>searchBooks</servlet-name>
+  	<url-pattern>/servlet/searchBooksServlet</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

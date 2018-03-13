@@ -29,4 +29,19 @@ public class BookServiceImpl {
 	public void updateBook(Book book) throws SQLException{
 		dao.updateBook(book);
 	}
+
+	//删除一本图书
+	public void deleteBook(String id) throws SQLException {
+		dao.deleteBook(id);
+	}
+
+	//批量删除图书
+	public void deleteAllBooks(String[] ids) throws SQLException {
+		dao.deleteAllBooks(ids);
+	}
+
+	//多条件查询
+	public List<Book> searchBooks(String id, String category, String name, String minprice, String maxprice) throws SQLException {
+		return dao.searchBooks(id,category,name,minprice,maxprice);
+	}
 }

@@ -12,32 +12,37 @@ import javax.servlet.http.HttpServletResponse;
 import com.chao.domain.Book;
 import com.chao.service.BookServiceImpl;
 
-public class BookListServlet extends HttpServlet{
+public class SearchBooksServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//设置浏览器编码
+		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=UTF-8");
 		
+		//获取表单数据
+		String id = req.getParameter("id");
+		String category = req.getParameter("category");
+		String name = req.getParameter("name");
+		String minprice = req.getParameter("minprice");
+		String maxprice = req.getParameter("maxprice");
+		
+		//调用业务逻辑
+		List<Book> books=null;
 		BookServiceImpl service = new BookServiceImpl();
-		List<Book> list = null;
 		try {
-			list = service.findAllBooks();
+			books = service.searchBooks(id,category,name,minprice,maxprice);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if(list!=null){
-			//System.out.println(list);
-			req.setAttribute("books", list);
-			req.getRequestDispatcher("/admin/products/list.jsp").forward(req, resp);;
-		}
 		
-		
+		System.out.println(books);
+		req.setAttribute("books", books);
+		req.getRequestDispatcher("/admin/products/list.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
 	}
-
+	
 }

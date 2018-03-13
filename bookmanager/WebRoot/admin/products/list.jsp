@@ -9,15 +9,45 @@
 <script language="javascript"
 	src="${pageContext.request.contextPath}/admin/js/public.js"></script>
 <script type="text/javascript">
+
 	function addProduct() {
 		window.location.href = "${pageContext.request.contextPath}/admin/products/add.jsp";
 	}
+	
+	function delBook(id,name){
+		if(confirm("是否确定删除: " + name + "?")){
+			location.href="${pageContext.request.contextPath}/servlet/delBookServlet?id="+id;
+		}
+	}
+	
+	function checkAll(){
+		var flag = document.getElementById("ckAll").checked;
+		var ids = document.getElementsByName("ids");
+		for(var i=0;i<ids.length;i++){
+			ids[i].checked = flag;
+		}
+	}
+	
+	function delAllBooks(){
+		var ids = document.getElementsByName("ids");
+		var str="";
+		for(var i=0;i<ids.length;i++){
+		if(ids[i].checked)
+			str += "ids="+ids[i].value+"&";
+		}
+		str = str.substring(0, str.length-1);
+		if(confirm("是否确定删除?")){
+			location.href="${pageContext.request.contextPath}/servlet/delAllBooksServlet?"+str;
+		}
+	}
+	
+	
 </script>
 </HEAD>
 <body>
 	<br>
 	<form id="Form1" name="Form1"
-		action="${pageContext.request.contextPath}/findProductByManyCondition"
+		action="${pageContext.request.contextPath}/servlet/searchBooksServlet"
 		method="post">
 		<table cellSpacing="1" cellPadding="0" width="100%" align="center"
 			bgColor="#f5fafe" border="0">
@@ -97,6 +127,11 @@
 				</tr>
 				<tr>
 					<td class="ta_01" align="right">
+					
+						<button type="button" id="del" name="del" value="批量删除"
+							class="button_del" onclick="delAllBooks()">批量删除
+						</button>
+					
 						<button type="button" id="add" name="add" value="&#28155;&#21152;"
 							class="button_add" onclick="addProduct()">&#28155;&#21152;
 						</button>
@@ -109,6 +144,7 @@
 							style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
 							<tr
 								style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
+								<td align="center" width="10%"><input type="checkbox" id="ckAll" onclick="checkAll()">全选/全不选</td>
 								<td align="center" width="24%">商品编号</td>
 								<td align="center" width="18%">商品名称</td>
 								<td align="center" width="9%">商品价格</td>
@@ -123,6 +159,8 @@
 							
 								<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
+									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+										width="10"><input type="checkbox" name="ids" value="${b.id }"></td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 										width="23">${b.id }</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
@@ -140,7 +178,7 @@
 									</td>
 
 									<td align="center" style="HEIGHT: 22px" width="7%"><a
-										href="#">
+										href="javascript:delBook('${b.id }','${b.name }')">
 											<img
 											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
 											width="16" height="16" border="0" style="CURSOR: hand">

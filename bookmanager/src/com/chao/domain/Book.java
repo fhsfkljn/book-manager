@@ -1,6 +1,8 @@
 package com.chao.domain;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable{
 	private String id;
 	private String name;
 	private double price;
