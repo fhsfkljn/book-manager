@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.chao.dao.BookDaoImpl;
 import com.chao.domain.Book;
+import com.chao.domain.PageBean;
 
 public class BookServiceImpl {
 	
@@ -44,4 +45,21 @@ public class BookServiceImpl {
 	public List<Book> searchBooks(String id, String category, String name, String minprice, String maxprice) throws SQLException {
 		return dao.searchBooks(id,category,name,minprice,maxprice);
 	}
+
+	//处理分页
+	public PageBean findBookPage(int currentPage, int pageSize) throws SQLException {
+		int count = dao.booksCount();   //获得书 的总数
+		int totalPage = (int)Math.ceil(count*1.0/pageSize);   //获得总页数
+		List<Book> books = dao.findBooks(currentPage,pageSize);    //获得分页图书
+		
+		PageBean page = new PageBean();
+		page.setCount(count);
+		page.setCurrentPage(currentPage);
+		page.setBooks(books);
+		page.setPageSize(pageSize);
+		page.setTotalPage(totalPage);
+		
+		return page;
+	}
+
 }

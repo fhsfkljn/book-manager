@@ -65,6 +65,24 @@
   	<url-pattern>/servlet/searchBooksServlet</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>booksPage</servlet-name>
+  	<servlet-class>com.chao.web.servlet.PageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>booksPage</servlet-name>
+  	<url-pattern>/servlet/pageServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>bookInfo</servlet-name>
+  	<servlet-class>com.chao.web.servlet.BookInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>bookInfo</servlet-name>
+  	<url-pattern>/servlet/bookInfoServlet</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

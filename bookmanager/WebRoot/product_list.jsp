@@ -1,9 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-
+	<base href="<%=basePath%>">
 
 <title>bookStore列表</title>
 <%--导入css --%>
@@ -37,163 +42,26 @@
 
 								<table cellspacing="0" class="booklist">
 									<tr>
+									<c:forEach items="${page.books }" var="b">
 										<td>
 
 											<div class="divbookpic">
 												<p>
-													<a href="#"><img src="" width="115" height="129"
+													<a href="${pageContext.request.contextPath}/servlet/bookInfoServlet?id=${b.id}"><img src="" width="115" height="129"
 														border="0" /> </a>
 												</p>
 											</div>
 
 											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
+												<a href="${pageContext.request.contextPath}/servlet/bookInfoServlet?id=${b.id}">书名:${b.name }<br />售价:${b.price } </a>
 											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
+										</td>
+									</c:forEach>
 
 									</tr>
 								</table>
-								<table cellspacing="0" class="booklist">
-									<tr>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-
-									</tr>
-								</table>
-								<table cellspacing="0" class="booklist">
-									<tr>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-										<td>
-
-											<div class="divbookpic">
-												<p>
-													<a href="#"><img src="" width="115" height="129"
-														border="0" /> </a>
-												</p>
-											</div>
-
-											<div class="divlisttitle">
-												<a href="#">书名:xxx<br />售价:xxx </a>
-											</div></td>
-
-									</tr>
-								</table>
+								
+								
 
 
 
@@ -214,12 +82,12 @@
 									<ul>
 
 
-										<li class="disablepage">&lt;&lt;上一页</li>
+										<li class="disablepage"><a href="${pageContext.request.contextPath }/servlet/pageServlet?currentPage=${page.currentPage==1?1:page.currentPage-1}">&lt;&lt;上一页</a></li>
 										
 										
-										<li>第1页/共5页</li>
+										<li>第${page.currentPage }页/共${page.totalPage }页</li>
 
-										<li class="nextPage"><a href="#">&lt;&lt;下一页</a></li>
+										<li class="nextPage"><a href="${pageContext.request.contextPath }/servlet/pageServlet?currentPage=${page.currentPage==page.totalPage?page.totalPage:page.currentPage+1}">&lt;&lt;下一页</a></li>
 
 
 									</ul>
