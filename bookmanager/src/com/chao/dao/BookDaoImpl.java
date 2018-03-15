@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.chao.domain.Book;
@@ -149,5 +150,28 @@ public class BookDaoImpl {
 	public List<Book> findBooks(int currentPage, int pageSize) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDs());
 		return qr.query("select * from book limit ?,?", new BeanListHandler<Book>(Book.class),(currentPage-1)*pageSize,pageSize);
+	}
+
+	/**
+	 * 通过邮箱名获取邮箱
+	 * @param email
+	 * @throws SQLException 
+	 */
+	public String getEmailByName(String email) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDs());
+		return (String) qr.query("select email from users where email=?", new ScalarHandler(),email);
+	}
+
+	/**
+	 * 根据图书名字找到图书
+	 * @param name
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<Object> searchBookByName(String name) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDs());
+		List<Object> query = qr.query("select name from book where name like ?", new ColumnListHandler(),"%"+name+"%");
+		//System.out.println(query);
+		return query;
 	}
 }

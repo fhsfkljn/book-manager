@@ -62,4 +62,15 @@ public class BookServiceImpl {
 		return page;
 	}
 
+	//通过邮箱名获取邮箱
+	public String getEmailByName(String email) throws SQLException {
+		return dao.getEmailByName(email);
+		
+	}
+
+	//根据图书名字查询图书
+	public List<Object> searchBookByName(String name) throws SQLException {
+		return dao.searchBookByName(name);
+	}
+
 }
