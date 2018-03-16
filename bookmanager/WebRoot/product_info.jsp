@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</div>
 
 											<div style="text-align:center; margin-top:25px">
-												<a href="#"> <img src="images/buybutton.gif" border="0" />
+												<a href="${pageContext.request.contextPath }/servlet/addCartServlet?id=${b.id }"> <img src="images/buybutton.gif" border="0" />
 												</a>
 											</div>
 										</td>

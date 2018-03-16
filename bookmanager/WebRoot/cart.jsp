@@ -1,10 +1,34 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <title>电子书城</title>
 <link rel="stylesheet" href="css/main.css" type="text/css" />
+<script type="text/javascript">
 
+	function changeProductNum(num,totalNum,id){
+		
+		num = parseInt(num);
+		totalNum = parseInt(totalNum);
+		
+		if(num<1){
+			alert("商品最少有一件！");
+			num = 1;
+		}
+		if(num>totalNum){
+			alert("购买数量不能大于库存数量!");
+			num = totalNum;
+		}
+		
+		
+		location.href = "${pageContext.request.contextPath}/servlet/changeNumServlet?id="+id+"&num="+num;
+		
+	
+	}
+	
+	
+</script>
 
 
 </head>
@@ -46,9 +70,11 @@
 												</tr>
 											</table> 
 											
+											<c:set var="sum" value="0" > </c:set>
+											<c:forEach items="${cart }" var="entry" varStatus="vs">
 												<table width="100%" border="0" cellspacing="0">
 													<tr>
-														<td width="10%">${vs.count}</td>
+														<td width="10%">${vs.count }</td>
 														<td width="30%">${entry.key.name }</td>
 
 														<td width="10%">${entry.key.price }</td>
@@ -62,20 +88,23 @@
 															onclick="changeProductNum('${entry.value+1}','${entry.key.pnum}','${entry.key.id}')">
 
 														</td>
-														<td width="10%">${entry.key.pnum}</td>
-														<td width="10%">${entry.key.price*entry.value}</td>
+														<td width="10%">${entry.key.pnum }</td>
+														<td width="10%">${entry.value*entry.key.price }</td>
 
-														<td width="10%"><a href="${pageContext.request.contextPath}/changeCart?id=${entry.key.id}&count=0"
+														<td width="10%"><a href="${pageContext.request.contextPath}/servlet/changeNumServlet?id=${entry.key.id}&num=0"
 															style="color:#FF0000; font-weight:bold">X</a></td>
 													</tr>
 												</table>
 												
+												<c:set var="sum" value="${sum+entry.value*entry.key.price }"> </c:set>
+												
+											</c:forEach>
 
 
 											<table cellspacing="1" class="carttable">
 												<tr>
 													<td style="text-align:right; padding-right:40px;"><font
-														style="color:#FF6600; font-weight:bold">合计：&nbsp;&nbsp;${total}元</font>
+														style="color:#FF6600; font-weight:bold">合计：&nbsp;&nbsp;${sum}元</font>
 													</td>
 												</tr>
 											</table>
