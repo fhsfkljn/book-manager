@@ -6,6 +6,7 @@ import java.util.List;
 import com.chao.dao.BookDaoImpl;
 import com.chao.domain.Book;
 import com.chao.domain.PageBean;
+import com.chao.domain.User;
 
 public class BookServiceImpl {
 	
@@ -71,6 +72,11 @@ public class BookServiceImpl {
 	//根据图书名字查询图书
 	public List<Object> searchBookByName(String name) throws SQLException {
 		return dao.searchBookByName(name);
+	}
+
+	//验证用户登录
+	public User loginUser(String username, String password) throws SQLException {
+		return dao.loginUser(username, password);
 	}
 
 }

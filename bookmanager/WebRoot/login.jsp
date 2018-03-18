@@ -1,8 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<base href="<%=basePath%>">
 <title>电子书城</title>
 
 <link rel="stylesheet" href="css/main.css" type="text/css" />
@@ -14,7 +18,7 @@
 	<jsp:include page="menu_search.jsp" />
 
 	<div id="divcontent">
-		<form action="${pageContext.request.contextPath}/login" method="post">
+		<form action="${pageContext.request.contextPath}/servlet/loginServlet" method="post">
 			<table width="900px" border="0" cellspacing="0">
 				<tr>
 					<td style="padding:30px"><div style="height:470px">
@@ -32,7 +36,7 @@
 													</tr>
 													<tr>
 														<td style="text-align:center;padding-top:20px;"><font
-															color="#ff0000">${requestScope["register_message"]}</font>
+															color="#ff0000">${msg}</font>
 														</td>
 													</tr>
 													<tr>
@@ -56,7 +60,7 @@
 																	<td colspan="2" style="text-align:center"><input
 																		type="checkbox" name="checkbox" value="checkbox" />
 																		记住用户名&nbsp;&nbsp; <input type="checkbox"
-																		name="checkbox" value="checkbox" /> 自动登录</td>
+																		name="autologin" /> 自动登录</td>
 																</tr>
 																<tr>
 																	<td colspan="2"

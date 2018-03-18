@@ -1,8 +1,9 @@
 package com.chao.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PageBean {
+public class PageBean implements Serializable{
 	private int currentPage;   //当前页面
 	private int pageSize;   //一页商品数
 	private int count;    //总商品数

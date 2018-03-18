@@ -11,6 +11,7 @@ import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.chao.domain.Book;
+import com.chao.domain.User;
 import com.chao.util.C3P0Util;
 
 public class BookDaoImpl {
@@ -173,5 +174,18 @@ public class BookDaoImpl {
 		List<Object> query = qr.query("select name from book where name like ?", new ColumnListHandler(),"%"+name+"%");
 		//System.out.println(query);
 		return query;
+	}
+
+	/**
+	 * 验证用户登录功能
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws SQLException 
+	 */
+	public User loginUser(String username, String password) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDs());
+		User user = qr.query("select username,password from users where username=? and password=?", new BeanHandler<User>(User.class),username,password);
+		return user;
 	}
 }
