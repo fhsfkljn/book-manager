@@ -35,7 +35,7 @@ public class BookDaoImpl {
 	 */
 	public void addBook(Book book) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDs());
-		qr.update("insert into book values(?,?,?,?,?,?)",book.getId(),book.getName(),book.getPrice(),book.getPnum(),book.getCategory(),book.getDescription());
+		qr.update("insert into book values(?,?,?,?,?,?,?)",book.getId(),book.getName(),book.getPrice(),book.getPnum(),book.getCategory(),book.getDescription(),book.getImg_url());
 	}
 	
 	/**

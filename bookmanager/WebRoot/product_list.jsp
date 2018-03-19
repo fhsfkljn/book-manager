@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 											<div class="divbookpic">
 												<p>
-													<a href="${pageContext.request.contextPath}/servlet/bookInfoServlet?id=${b.id}"><img src="" width="115" height="129"
+													<a href="${pageContext.request.contextPath}/servlet/bookInfoServlet?id=${b.id}"><img src="${pageContext.request.contextPath}/upload/${b.img_url}" width="115" height="129"
 														border="0" /> </a>
 												</p>
 											</div>

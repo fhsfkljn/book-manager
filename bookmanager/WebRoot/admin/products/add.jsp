@@ -11,7 +11,8 @@
 
 <body>
 	<form id="userAction_save_do" name="Form1"
-		action="${pageContext.request.contextPath }/servlet/bookAddServlet" method="post">
+		action="${pageContext.request.contextPath }/servlet/bookAddServlet" method="post"
+		enctype="multipart/form-data">
 		&nbsp;
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
 			bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">
@@ -66,7 +67,7 @@
 				<td align="center" bgColor="#f5fafe" class="ta_01">商品图片：</td>
 				<td class="ta_01" bgColor="#ffffff" colSpan="3">
 				<input
-					type="file" name="upload" size="30" value=""/>
+					type="file" name="img_url" size="30" value=""/>
 				</td>
 			</tr>
 			<TR>
